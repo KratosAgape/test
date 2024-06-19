@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Blog Post</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Chat</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  #messages {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: 200px;
+    overflow-y: scroll;
+  }
+  #message-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Create a Blog Post</h1>
-        <form id="blogForm">
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-            <div class="form-group">
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="file">Upload Photo or Video:</label>
-                <input type="file" id="file" name="file" accept="image/*,video/*">
-            </div>
-            <button type="submit">Post</button>
-        </form>
-        <div id="preview" class="preview">
-            <h2>Preview:</h2>
-            <h3 id="previewTitle"></h3>
-            <p id="previewContent"></p>
-            <div id="previewMedia"></div>
-        </div>
-    </div>
+  <div id="messages"></div>
+  <form id="message-form">
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button type="submit">Send</button>
+  </form>
 
-    <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const messageForm = document.getElementById('message-form');
+      const messageInput = document.getElementById('message-input');
+      const messagesDiv = document.getElementById('messages');
+
+      messageForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const messageText = messageInput.value.trim();
+        if (messageText !== '') {
+          displayMessage(messageText);
+          messageInput.value = '';
+        }
+      });
+
+      function displayMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messagesDiv.appendChild(messageElement);
+        // Scroll to the bottom to show the latest message
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    });
+  </script>
 </body>
 </html>
