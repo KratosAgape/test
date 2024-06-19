@@ -2,7 +2,7 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = htmlspecialchars($_POST['title']);
     $content = htmlspecialchars($_POST['content']);
-    $target_dir = "uploads/";
+    $target_dir = "/";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     $uploadOk = 1;
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Check file size
-    if ($_FILES["image"]["size"] > 500000) {
+    if ($_FILES["image"]["size"] > 500000000000000000000000000000000000000000000000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
